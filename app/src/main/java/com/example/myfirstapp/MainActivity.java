@@ -9,29 +9,53 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView birthdateTextView;
-    private DatePickerDialog.OnDateSetListener birthdateTextViewListener;
+    private TextView editTextPersonName, editTextPersonLastName, editTextDate;
+    private RadioGroup isAProgrammerGroup;
+    private CheckBox javaCheckbox, pythonCheckbox, jsCheckbox, goLangCheckbox, ccppCheckbox, csCheckbox;
+    private Spinner genderSpinner;
+    private Button btnSend, btnClear;
 
+    private DatePickerDialog.OnDateSetListener birthdateTextViewListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
+        this.instantiate();
+
         this.addGenderSpinnerOptions();
         this.createDatePicker();
     }
 
-    private void addGenderSpinnerOptions() {
-        birthdateTextView = (TextView) findViewById(R.id.editTextDate);
+    private void instantiate() {
+        editTextPersonName = (TextView) findViewById(R.id.editTextPersonName);
+        editTextPersonLastName = (TextView) findViewById(R.id.editTextPersonLastName);
+        editTextDate = (TextView) findViewById(R.id.editTextDate);
+        isAProgrammerGroup = (RadioGroup) findViewById(R.id.isAProgrammerGroup);
+        javaCheckbox = (CheckBox) findViewById(R.id.javaCheckbox);
+        pythonCheckbox = (CheckBox) findViewById(R.id.pythonCheckbox);
+        jsCheckbox = (CheckBox) findViewById(R.id.jsCheckbox);
+        goLangCheckbox = (CheckBox) findViewById(R.id.goLangCheckbox);
+        ccppCheckbox = (CheckBox) findViewById(R.id.ccppCheckbox);
+        csCheckbox = (CheckBox) findViewById(R.id.csCheckbox);
+        genderSpinner = (Spinner) findViewById(R.id.spinnerGender);
+        btnSend = (Button) findViewById(R.id.btnSend);
+        btnClear = (Button) findViewById(R.id.btnClear);
 
-        Spinner genderSpinner = (Spinner) findViewById(R.id.spinnerGender);
+    }
+
+    private void addGenderSpinnerOptions() {
+
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(MainActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.genders_array));
 
@@ -42,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void createDatePicker() {
 
-        birthdateTextView.setOnClickListener( new View.OnClickListener() {
+
+        editTextDate.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar calendar = Calendar.getInstance();
@@ -67,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("MainActivity", "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
 
                 String date = month + "/" + day + "/" + year;
-                birthdateTextView.setText(date);
+                editTextDate.setText(date);
             }
         };
     }
