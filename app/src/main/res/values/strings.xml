@@ -2,15 +2,17 @@
     <string name="app_name">My First App</string>
     <string name="nameHint">Digite un Nombre</string>
     <string name="lastNameHint">Digite un Apellido</string>
-    <string name="gender">Género</string>
+    <string name="gender">Género:</string>
     <string-array name="genders_array">
         <item>Masculino</item>
         <item>Femenino</item>
     </string-array>
-    <string name="isAProgrammer">Femenino</string>
+    <string name="birthdate">Nacimiento:</string>
+    <string name="date">mm/dd/yyyy:</string>
+    <string name="isAProgrammer">¿Le gusta programar?</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
-    <string name="language">Lenguaje</string>
+    <string name="language">Lenguaje:</string>
     <string name="send">Enviar</string>
     <string name="clean">Limpiar</string>
 </resources>
