@@ -20,5 +20,5 @@
     <string name="ccpp">C/C++</string>
     <string name="cs">C#</string>
     <string name="send">Enviar</string>
-    <string name="clean">Limpiar</string>
+    <string name="clear">Limpiar</string>
 </resources>

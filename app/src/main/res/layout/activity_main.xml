@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/clearButton"
+        android:layout_width="176dp"
+        android:layout_height="49dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/clear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
         android:id="@+id/language"
         android:layout_width="178dp"
@@ -191,5 +201,15 @@
         android:text="@string/js"
         app:layout_constraintEnd_toStartOf="@+id/goLangCheckbox"
         app:layout_constraintTop_toBottomOf="@+id/javaCheckbox2" />
+
+    <Button
+        android:id="@+id/sendButton"
+        android:layout_width="176dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/send"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
