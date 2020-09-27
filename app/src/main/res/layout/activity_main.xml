@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:layout_marginBottom="97dp"
+        android:layout_marginBottom="102dp"
         android:autofillHints="@string/nameHint"
         android:ems="10"
         android:hint="@string/nameHint"
         android:inputType="textPersonName"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName7"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,25 +36,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName7"
-        android:layout_width="139dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="510dp"
-        android:ems="10"
-        android:autofillHints="@string/gender"
-        android:inputType="textPersonName"
-        android:text="@string/gender"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPersonName" />
-
     <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="244dp"
-        android:layout_height="47dp"
-        tools:layout_editor_absoluteX="156dp"
-        tools:layout_editor_absoluteY="173dp" />
+        android:id="@+id/spinnerGender"
+        android:layout_width="221dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="32dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.565"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPersonLastName" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="104dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/gender"
+        android:textAlignment="viewStart"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPersonLastName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
