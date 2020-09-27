@@ -2,7 +2,9 @@ package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,7 +23,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private TextView editTextPersonName, editTextPersonLastName, editTextDate;
-    private RadioGroup isAProgrammerGroup;
+    private RadioButton isAProgrammerGroup;
     private CheckBox javaCheckbox, pythonCheckbox, jsCheckbox, goLangCheckbox, ccppCheckbox, csCheckbox;
     private Spinner genderSpinner;
     private Button btnSend, btnClear;
@@ -35,23 +38,39 @@ public class MainActivity extends AppCompatActivity {
 
         this.addGenderSpinnerOptions();
         this.createDatePicker();
+
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDataActivity();
+            }
+        });
+    }
+
+    private void openDataActivity() {
+        Intent intent = new Intent(this, DisplayDataActivity.class);
+        intent.putExtra("fullName", editTextPersonName.getText().toString() + " " + editTextPersonLastName.getText().toString());
+        intent.putExtra("gender", genderSpinner.getSelectedItem().toString());
+        intent.putExtra("birthdate", editTextDate.getText().toString());
+        intent.putExtra("isAProgrammerGroup", isAProgrammerGroup.isChecked());
+
+        startActivity(intent);
     }
 
     private void instantiate() {
         editTextPersonName = (TextView) findViewById(R.id.editTextPersonName);
         editTextPersonLastName = (TextView) findViewById(R.id.editTextPersonLastName);
+        genderSpinner = (Spinner) findViewById(R.id.spinnerGender);
         editTextDate = (TextView) findViewById(R.id.editTextDate);
-        isAProgrammerGroup = (RadioGroup) findViewById(R.id.isAProgrammerGroup);
+        isAProgrammerGroup = (RadioButton) findViewById(R.id.radioButtonYes);
         javaCheckbox = (CheckBox) findViewById(R.id.javaCheckbox);
         pythonCheckbox = (CheckBox) findViewById(R.id.pythonCheckbox);
         jsCheckbox = (CheckBox) findViewById(R.id.jsCheckbox);
         goLangCheckbox = (CheckBox) findViewById(R.id.goLangCheckbox);
         ccppCheckbox = (CheckBox) findViewById(R.id.ccppCheckbox);
         csCheckbox = (CheckBox) findViewById(R.id.csCheckbox);
-        genderSpinner = (Spinner) findViewById(R.id.spinnerGender);
         btnSend = (Button) findViewById(R.id.btnSend);
         btnClear = (Button) findViewById(R.id.btnClear);
-
     }
 
     private void addGenderSpinnerOptions() {
