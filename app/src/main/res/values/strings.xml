@@ -13,6 +13,12 @@
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="language">Lenguaje:</string>
+    <string name="java">Java</string>
+    <string name="python">Python</string>
+    <string name="js">JS</string>
+    <string name="go">Go Lang</string>
+    <string name="ccpp">C/C++</string>
+    <string name="cs">C#</string>
     <string name="send">Enviar</string>
     <string name="clean">Limpiar</string>
 </resources>

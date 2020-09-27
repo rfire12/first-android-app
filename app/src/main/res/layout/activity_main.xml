@@ -7,6 +7,18 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/language"
+        android:layout_width="178dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:text="@string/language"
+        android:textAlignment="viewStart"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/isAProgrammer" />
+
+    <TextView
         android:id="@+id/isAProgrammer"
         android:layout_width="178dp"
         android:layout_height="33dp"
@@ -117,5 +129,67 @@
             android:layout_height="wrap_content"
             android:text="@string/no" />
     </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/javaCheckbox2"
+        android:layout_width="70dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/java"
+        app:layout_constraintEnd_toStartOf="@+id/pythonCheckbox"
+        app:layout_constraintTop_toBottomOf="@+id/isAProgrammerGroup" />
+
+    <CheckBox
+        android:id="@+id/pythonCheckbox"
+        android:layout_width="80dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="28dp"
+        android:text="@string/python"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/isAProgrammerGroup" />
+
+    <CheckBox
+        android:id="@+id/goLangCheckbox"
+        android:layout_width="95dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:text="@string/go"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pythonCheckbox" />
+
+    <CheckBox
+        android:id="@+id/csCheckbox"
+        android:layout_width="78dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
+        android:text="@string/js"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goLangCheckbox"
+        tools:text="@string/cs" />
+
+    <CheckBox
+        android:id="@+id/ccppCheckbox"
+        android:layout_width="83dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:text="@string/js"
+        app:layout_constraintEnd_toStartOf="@+id/csCheckbox"
+        app:layout_constraintTop_toBottomOf="@+id/jsCheckbox"
+        tools:text="@string/ccpp" />
+
+    <CheckBox
+        android:id="@+id/jsCheckbox"
+        android:layout_width="66dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="28dp"
+        android:text="@string/js"
+        app:layout_constraintEnd_toStartOf="@+id/goLangCheckbox"
+        app:layout_constraintTop_toBottomOf="@+id/javaCheckbox2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
