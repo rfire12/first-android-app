@@ -21,7 +21,8 @@ public class DisplayDataActivity extends AppCompatActivity {
         additionalDataView = findViewById(R.id.additionalDataView);
         languagesView = findViewById(R.id.languagesView);
 
-        nameView.setText("Hola! Mi nombre es: " + intent.getExtras().getString("fullName"));
-        additionalDataView.setText("Soy " + intent.getExtras().getString("gender") + " y nací en fecha: " + intent.getExtras().getString("birthdate"));
+        nameView.setText( intent.getExtras().getString("nameView"));
+        additionalDataView.setText(intent.getExtras().getString("additionalDataView"));
+        languagesView.setText(intent.getExtras().getString("languagesView"));
     }
 }

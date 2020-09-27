@@ -1,5 +1,6 @@
 package com.example.myfirstapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -7,6 +8,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +21,9 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private TextView editTextPersonName, editTextPersonLastName, editTextDate;
@@ -40,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         this.createDatePicker();
 
         btnSend.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 openDataActivity();
@@ -47,14 +52,34 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void openDataActivity() {
         Intent intent = new Intent(this, DisplayDataActivity.class);
-        intent.putExtra("fullName", editTextPersonName.getText().toString() + " " + editTextPersonLastName.getText().toString());
-        intent.putExtra("gender", genderSpinner.getSelectedItem().toString());
-        intent.putExtra("birthdate", editTextDate.getText().toString());
-        intent.putExtra("isAProgrammerGroup", isAProgrammerGroup.isChecked());
+        intent.putExtra("nameView", " Hola! Mi nombre es: " + editTextPersonName.getText().toString() + " " + editTextPersonLastName.getText().toString());
+        intent.putExtra("additionalDataView", "Soy " + genderSpinner.getSelectedItem().toString() + " y nací en fecha: " + editTextDate.getText().toString());
+        intent.putExtra("languagesView", isAProgrammerGroup.isChecked() ? "Me gusta programar. Mis lenguajes favoritos son: " +
+                this.getFavoriteLanguages() : "No me gusta la programación");
 
         startActivity(intent);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private String getFavoriteLanguages() {
+        List<String> favoriteLanguages = new ArrayList<>();
+        if ( javaCheckbox.isChecked() )
+            favoriteLanguages.add("Java");
+        if ( pythonCheckbox.isChecked() )
+            favoriteLanguages.add("Python");
+        if ( jsCheckbox.isChecked() )
+            favoriteLanguages.add("JS");
+        if ( goLangCheckbox.isChecked() )
+            favoriteLanguages.add("Go Lang");
+        if ( ccppCheckbox.isChecked() )
+            favoriteLanguages.add("C/C++");
+        if ( csCheckbox.isChecked() )
+            favoriteLanguages.add("C#");
+
+        return String.join(", ", favoriteLanguages);
     }
 
     private void instantiate() {
