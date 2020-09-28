@@ -8,7 +8,7 @@
         <item>Femenino</item>
     </string-array>
     <string name="birthdate">Nacimiento:</string>
-    <string name="date">mm/dd/yyyy:</string>
+    <string name="date">mm/dd/yyyy</string>
     <string name="isAProgrammer">¿Le gusta programar?</string>
     <string name="yes">Si</string>
     <string name="no">No</string>

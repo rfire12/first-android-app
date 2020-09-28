@@ -38,13 +38,14 @@ public class MainActivity extends AppCompatActivity {
 
     private DatePickerDialog.OnDateSetListener birthdateTextViewListener;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
         this.instantiate();
-
         this.addGenderSpinnerOptions();
+
         this.createDatePicker();
 
         this.clearFields();
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void clearFields() {
         editTextPersonName.setText("");
         editTextPersonLastName.setText("");
@@ -224,11 +226,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                Log.d("MainActivity", "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
-
                 String date = month + "/" + day + "/" + year;
                 editTextDate.setText(date);
             }
         };
+
+
     }
 }
