@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -27,7 +28,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private TextView editTextPersonName, editTextPersonLastName, editTextDate;
-    private RadioButton isAProgrammerGroup;
+    private RadioButton likesProgramming;
+    private RadioGroup isAProgrammerGroup;
     private CheckBox javaCheckbox, pythonCheckbox, jsCheckbox, goLangCheckbox, ccppCheckbox, csCheckbox;
     private Spinner genderSpinner;
     private Button btnSend, btnClear;
@@ -47,9 +49,60 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                openDataActivity();
+                String errorMessage = validateFields();
+                if( errorMessage == "false" )
+                    openDataActivity();
+                else
+                    openErrorDialog(errorMessage);
             }
         });
+
+        isAProgrammerGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId)
+            {
+                RadioButton checkedRadioButton = (RadioButton)group.findViewById(checkedId);
+                boolean isChecked = checkedRadioButton.isChecked();
+
+                if (checkedId == R.id.radioButtonYes )
+                    toggleLanguagesCheckboxes(true);
+                else
+                    toggleLanguagesCheckboxes(false);
+            }
+
+        });
+
+    }
+
+    private void toggleLanguagesCheckboxes(Boolean toggle) {
+        javaCheckbox.setEnabled(toggle);
+        pythonCheckbox.setEnabled(toggle);
+        jsCheckbox.setEnabled(toggle);
+        goLangCheckbox.setEnabled(toggle);
+        ccppCheckbox.setEnabled(toggle);
+        csCheckbox.setEnabled(toggle);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private String validateFields() {
+        if ( editTextPersonName.getText().toString().equals("") )
+            return "Debe colocar su nombre";
+
+        if ( editTextPersonLastName.getText().toString().equals("") )
+            return "Debe colocar su apellido";
+
+        if ( genderSpinner.getSelectedItem().toString().equals("") )
+            return "Debe elegir su genero";
+
+        if ( likesProgramming.isChecked() && getFavoriteLanguages().equals("") )
+            return "Debe seleccionar sus lenguajes favoritos";
+
+        return "false";
+    }
+
+    private void openErrorDialog(String errorMessage) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+        alert.setMessage(errorMessage).setCancelable(true).create().show();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -57,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DisplayDataActivity.class);
         intent.putExtra("nameView", " Hola! Mi nombre es: " + editTextPersonName.getText().toString() + " " + editTextPersonLastName.getText().toString());
         intent.putExtra("additionalDataView", "Soy " + genderSpinner.getSelectedItem().toString() + " y nací en fecha: " + editTextDate.getText().toString());
-        intent.putExtra("languagesView", isAProgrammerGroup.isChecked() ? "Me gusta programar. Mis lenguajes favoritos son: " +
+        intent.putExtra("languagesView", likesProgramming.isChecked() ? "Me gusta programar. Mis lenguajes favoritos son: " +
                 this.getFavoriteLanguages() : "No me gusta la programación");
 
         startActivity(intent);
@@ -87,7 +140,8 @@ public class MainActivity extends AppCompatActivity {
         editTextPersonLastName = (TextView) findViewById(R.id.editTextPersonLastName);
         genderSpinner = (Spinner) findViewById(R.id.spinnerGender);
         editTextDate = (TextView) findViewById(R.id.editTextDate);
-        isAProgrammerGroup = (RadioButton) findViewById(R.id.radioButtonYes);
+        likesProgramming = (RadioButton) findViewById(R.id.radioButtonYes);
+        isAProgrammerGroup = (RadioGroup) findViewById(R.id.isAProgrammerGroup);
         javaCheckbox = (CheckBox) findViewById(R.id.javaCheckbox);
         pythonCheckbox = (CheckBox) findViewById(R.id.pythonCheckbox);
         jsCheckbox = (CheckBox) findViewById(R.id.jsCheckbox);
