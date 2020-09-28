@@ -22,6 +22,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -45,18 +47,15 @@ public class MainActivity extends AppCompatActivity {
         this.addGenderSpinnerOptions();
         this.createDatePicker();
 
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onClick(View v) {
-                String errorMessage = validateFields();
-                if( errorMessage == "false" )
-                    openDataActivity();
-                else
-                    openErrorDialog(errorMessage);
-            }
-        });
+        this.clearFields();
 
+        this.registerEvents();
+
+
+
+    }
+
+    private void registerEvents() {
         isAProgrammerGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId)
@@ -69,9 +68,48 @@ public class MainActivity extends AppCompatActivity {
                 else
                     toggleLanguagesCheckboxes(false);
             }
-
         });
 
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+                String errorMessage = validateFields();
+                if( errorMessage == "false" )
+                    openDataActivity();
+                else
+                    openErrorDialog(errorMessage);
+            }
+        });
+
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+                clearFields();
+            }
+        });
+    }
+
+    private void clearFields() {
+        editTextPersonName.setText("");
+        editTextPersonLastName.setText("");
+        genderSpinner.setSelection(0);
+        editTextDate.setText(currentDate());
+        isAProgrammerGroup.check(R.id.radioButtonYes);
+        javaCheckbox.setChecked(false);
+        pythonCheckbox.setChecked(false);
+        jsCheckbox.setChecked(false);
+        goLangCheckbox.setChecked(false);
+        ccppCheckbox.setChecked(false);
+        csCheckbox.setChecked(false);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private String currentDate() {
+        LocalDate localDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        return localDate.format(formatter);
     }
 
     private void toggleLanguagesCheckboxes(Boolean toggle) {
@@ -163,7 +201,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createDatePicker() {
-
 
         editTextDate.setOnClickListener( new View.OnClickListener() {
             @Override
